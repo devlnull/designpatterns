@@ -1,5 +1,4 @@
-﻿using Creational.FactoryMathod;
-using Structural.Composite;
+﻿using Structural.Decorator;
 using System;
 
 namespace App
@@ -8,22 +7,13 @@ namespace App
     {
         static void Main(string[] args)
         {
-            Composite root = new Composite("root");
-            root.Add(new Leaf("leaf A"));
-            root.Add(new Leaf("leaf B"));
+            ConcreteComponent component = new ConcreteComponent();
+            ConcreteDecoratorA decoratorA = new ConcreteDecoratorA();
+            ConcreteDecoratorB decoratorB = new ConcreteDecoratorB();
+            decoratorA.SetComponent(component);
+            decoratorB.SetComponent(decoratorA);
 
-            Composite comp = new Composite("Composite X");
-            comp.Add(new Leaf("leaf XA"));
-            comp.Add(new Leaf("leaf XB"));
-
-            root.Add(comp);
-            root.Add(new Leaf("Leaf C"));
-
-            Leaf leaf = new Leaf("Leaf D");
-            root.Add(leaf);
-            root.Remove(leaf);
-
-            root.Display(1);
+            decoratorB.Operate();
 
             Console.ReadKey();
         }
