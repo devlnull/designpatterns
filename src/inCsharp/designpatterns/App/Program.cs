@@ -1,4 +1,5 @@
 ﻿using Creational.FactoryMathod;
+using Structural.Composite;
 using System;
 
 namespace App
@@ -7,15 +8,24 @@ namespace App
     {
         static void Main(string[] args)
         {
-            ICreator creator = new ConcreteCreator1();
-            SomeOperation(creator);
-        }
+            Composite root = new Composite("root");
+            root.Add(new Leaf("leaf A"));
+            root.Add(new Leaf("leaf B"));
 
-        static void SomeOperation(ICreator creator)
-        {
-            Console.WriteLine("Woring on creator operation...");
-            var instance = creator.Create();
-            instance.Operate();
+            Composite comp = new Composite("Composite X");
+            comp.Add(new Leaf("leaf XA"));
+            comp.Add(new Leaf("leaf XB"));
+
+            root.Add(comp);
+            root.Add(new Leaf("Leaf C"));
+
+            Leaf leaf = new Leaf("Leaf D");
+            root.Add(leaf);
+            root.Remove(leaf);
+
+            root.Display(1);
+
+            Console.ReadKey();
         }
     }
 }
