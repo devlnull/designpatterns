@@ -1,4 +1,5 @@
-﻿using Structural.Decorator;
+﻿using Behavioral.Observer;
+using Structural.Decorator;
 using System;
 
 namespace App
@@ -7,13 +8,14 @@ namespace App
     {
         static void Main(string[] args)
         {
-            ConcreteComponent component = new ConcreteComponent();
-            ConcreteDecoratorA decoratorA = new ConcreteDecoratorA();
-            ConcreteDecoratorB decoratorB = new ConcreteDecoratorB();
-            decoratorA.SetComponent(component);
-            decoratorB.SetComponent(decoratorA);
+            ConcreteSubject subject = new ConcreteSubject();
 
-            decoratorB.Operate();
+            subject.Attach(new ConcreteObserver(subject, "X"));
+            subject.Attach(new ConcreteObserver(subject, "Y"));
+            subject.Attach(new ConcreteObserver(subject, "Z"));
+
+            subject.SubjectState = "ABC";
+            subject.Notify();
 
             Console.ReadKey();
         }
