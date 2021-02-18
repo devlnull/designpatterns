@@ -20,6 +20,8 @@ namespace Behavioral.Observer
             Console.WriteLine($"Observer {_name}'s new state is {_observerState}");
         }
 
+        public string GetState() => _observerState;
+
         public ConcreteSubject Subject
         {
             get { return _subject; }
